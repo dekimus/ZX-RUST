@@ -14,9 +14,9 @@ uso (menús, atajos, barra de estado) está en [`UI.md`](UI.md).
 3. **Reloj del sistema solo para sincronizar, nunca como verdad.** El reloj del Spectrum avanza
    por T-states (69 888 por frame); `std::time::Instant` se usa únicamente para decidir *cuántos*
    frames toca ejecutar en cada repintado y para medir FPS.
-4. **Lógica pura testeable sin ventana.** `viewport`, `settings`, `actions`, `keymap` y `audio`
-   (salvo la apertura del dispositivo) son funciones puras con tests unitarios; `app.rs` es la
-   única pieza que habla con egui/eframe.
+4. **Lógica pura testeable sin ventana.** `viewport`, `settings`, `actions`, `keymap`, `icon`
+   y `audio` (salvo la apertura del dispositivo) son funciones puras con tests unitarios;
+   `app.rs` es la única pieza que habla con egui/eframe.
 
 ## 2. Módulos
 
@@ -35,6 +35,10 @@ src/bin/gui.rs  main: argumentos, resolución de ROM, fichero inicial, run_nativ
 
 Dependencias (feature `gui`): `eframe 0.36` (egui + glutin), `rfd` (selectores nativos),
 `cpal` (audio), `ringbuf` (buffer de audio).
+
+El `app_id` de la ventana es el nombre pasado a `run_native` (`zx48`): es la clave con la que un
+escritorio Wayland asocia `packaging/zx48.desktop` para mostrar el icono (en X11 el icono va
+embebido con `ViewportBuilder::with_icon`). Detalle en [`UI.md`](UI.md) §9.
 
 ## 3. Orden del bucle (`App::ui`)
 
@@ -166,6 +170,7 @@ sea claro.
 * `keymap`: biyección de las 38 teclas, modificadores, combos de puntuación, cursores/Kempston,
   diff estable, foco perdido ⇒ todo suelto, sin repeticiones.
 * `audio`: ring buffer, mezcla, ganancia, remuestreo.
+* `icon`: el PNG embebido decodifica, mide 256×256 (múltiplo de 4) y sus esquinas tienen alfa 0.
 * `app`: `frames_to_run`, `FRAME_TIME == 19 968 µs`, constantes de pacing.
 
 La validación visual en vivo se hace contra un Xvfb con capturas de la ventana (pantalla de

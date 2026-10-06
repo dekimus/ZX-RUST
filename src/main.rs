@@ -1,4 +1,5 @@
-//! CLI headless del emulador (CI, depuración, trazas, perfil). Sin ventana: ver `zx48-view`.
+//! CLI headless del emulador (CI, depuración, trazas, perfil). Sin ventana: la interfaz
+//! gráfica es el binario `zx48-gui` (feature `gui`).
 
 use std::io::{BufRead, Write};
 use std::path::PathBuf;
