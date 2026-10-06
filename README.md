@@ -39,8 +39,10 @@ src/audio     beeper (eventos) y remuestreador determinista
 src/tape      TAP, TZX y generación de la señal EAR
 src/snapshot  SNA, Z80 (v1/v2/v3, 48K), SCR
 src/debug     breakpoints, watchpoints, perfil
-src/frontend  lógica pura del frontend (viewport, ajustes, atajos, teclado, audio)  [feature `gui`]
+src/frontend  lógica pura del frontend (viewport, ajustes, atajos, teclado, audio, icono) [feature `gui`]
 src/bin/gui.rs  binario `zx48-gui` (eframe/egui + glutin + cpal + rfd)             [feature `gui`]
+assets      icono 256×256 con esquinas transparentes (a partir de ico.jpeg)
+scripts     make_icon.py, que regenera `assets/icon.png`
 ```
 
 Features: `cli` (tracing para el binario `zx48`), `gui` (dependencias de la interfaz); ambas

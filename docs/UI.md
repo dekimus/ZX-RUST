@@ -173,3 +173,24 @@ Claves desconocidas o inválidas se ignoran (valor por defecto), nunca rompen el
 | Las flechas no mueven el cursor | Con `kempston=1` son el joystick; desactívalo o usa Caps Shift + 5/6/7/8. |
 | Una tecla «se queda» pulsada | Pulsa y suelta esa tecla de nuevo (o cambia de ventana y vuelve: al perder foco se suelta todo). |
 | La cinta no arranca | F7 (rebobinar) y F6 (play), o escribe `LOAD ""` con la ROM; comprueba `tape_autoplay`. |
+
+## 9. Icono
+
+La ventana y la ventana **Ayuda ▸ Acerca de…** usan el logo del proyecto:
+
+* **Origen:** `ico.jpeg` (raíz del repositorio), el asset original.
+* **En el binario:** `assets/icon.png`, 256×256 con esquinas **realmente transparentes**
+  (el JPEG trae un damero gris dibujado en las esquinas —la típica "transparencia" falsa—,
+  que aquí se convierte en alfa). Va embebido con `include_bytes!`: no hay lectura de disco
+  al arrancar ni en el bucle de repintado.
+* **Módulo:** `src/frontend/icon.rs`, que lo decodifica con `eframe::icon_data`.
+  Si el PNG no decodificara, la ventana se abre con el icono por defecto (sin `unwrap`).
+
+Para regenerarlo cuando cambie `ico.jpeg` (requiere Pillow y numpy, sin ImageMagick):
+
+```bash
+python3 scripts/make_icon.py
+```
+
+El script recorta el logo a su caja delimitadora, sustituye el damero por transparencia,
+suaviza el borde y escala a 256×256 (múltiplo de 4, como exige `egui::IconData`).

@@ -118,6 +118,8 @@ pub struct App {
     error: Option<String>,
     show_help: bool,
     show_about: bool,
+    /// Textura del icono mostrado en la ventana «Acerca de» (se carga una sola vez).
+    about_icon: Option<egui::TextureHandle>,
     show_debug: bool,
     /// Reloj de sincronización con tiempo real.
     last_tick: Instant,
@@ -165,6 +167,7 @@ impl App {
             error: initial_error,
             show_help: false,
             show_about: false,
+            about_icon: None,
             show_debug,
             last_tick: Instant::now(),
             acc: Duration::ZERO,
@@ -930,6 +933,16 @@ impl App {
         self.show_help = help;
         let mut about = self.show_about;
         egui::Window::new("Acerca de").open(&mut about).resizable(false).show(ctx, |ui| {
+            // Icono del proyecto: se crea la textura una sola vez, en la primera apertura.
+            if self.about_icon.is_none() {
+                self.about_icon = crate::frontend::icon::color_image().map(|image| {
+                    ctx.load_texture("zx48-icon", image, egui::TextureOptions::LINEAR)
+                });
+            }
+            if let Some(icon) = &self.about_icon {
+                ui.add(egui::Image::new((icon.id(), egui::vec2(112.0, 112.0))));
+                ui.add_space(6.0);
+            }
             ui.heading("zx48");
             ui.label("Emulador de ZX Spectrum 48K en Rust.");
             ui.label("Núcleo independiente de la interfaz: CPU Z80, ULA con contención, cinta TAP/TZX, snapshots SNA/Z80.");

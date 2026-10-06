@@ -8,6 +8,7 @@
 
 use std::path::{Path, PathBuf};
 use zx48::frontend::app::App;
+use zx48::frontend::icon;
 use zx48::frontend::settings::Settings;
 use zx48::frontend::viewport;
 use zx48::machine::spectrum48::Spectrum48;
@@ -162,11 +163,16 @@ fn main() -> eframe::Result<()> {
     // 3) Ventana: tamaño inicial para mostrar la imagen a escala entera con las barras de UI.
     let region = settings.border_mode.region();
     let (w, h) = viewport::window_size_for(region, settings.window_scale.max(1), UI_CHROME);
+    let mut viewport = eframe::egui::ViewportBuilder::default()
+        .with_title("ZX Spectrum 48K")
+        .with_inner_size([w, h])
+        .with_min_inner_size([320.0, 240.0]);
+    // Icono de la ventana (embebido; si no decodifica, se queda el icono por defecto).
+    if let Some(icon) = icon::window_icon() {
+        viewport = viewport.with_icon(icon);
+    }
     let options = eframe::NativeOptions {
-        viewport: eframe::egui::ViewportBuilder::default()
-            .with_title("ZX Spectrum 48K")
-            .with_inner_size([w, h])
-            .with_min_inner_size([320.0, 240.0]),
+        viewport,
         ..Default::default()
     };
 

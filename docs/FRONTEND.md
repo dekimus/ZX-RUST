@@ -29,6 +29,7 @@ src/frontend/
   actions.rs    Action, tabla de atajos, anti-rebote de 300 ms                     (tests)
   keymap.rs     teclado físico → matriz del Spectrum / Kempston, diff por frame     (tests)
   audio.rs      productor de muestras (ring buffer), mezcla beeper+cinta, volumen   (tests)
+  icon.rs       icono embebido (`assets/icon.png`) para ventana y «Acerca de»      (tests)
 src/bin/gui.rs  main: argumentos, resolución de ROM, fichero inicial, run_native
 ```
 

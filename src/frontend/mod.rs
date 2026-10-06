@@ -4,6 +4,7 @@
 pub mod actions;
 pub mod app;
 pub mod audio;
+pub mod icon;
 pub mod keymap;
 pub mod settings;
 pub mod viewport;
