@@ -194,3 +194,24 @@ python3 scripts/make_icon.py
 
 El script recorta el logo a su caja delimitadora, sustituye el damero por transparencia,
 suaviza el borde y escala a 256×256 (múltiplo de 4, como exige `egui::IconData`).
+
+### Icono en Wayland (KDE Plasma, GNOME…)
+
+Wayland no permite que la aplicación envíe su icono de ventana: el escritorio lo toma del
+fichero `.desktop` cuyo nombre coincide con el `app_id` de la ventana (aquí, `zx48`).
+Sin esa entrada, la barra de título y el dock muestran un icono genérico; en X11 sí se ve
+el embebido. Para instalarla en el usuario actual:
+
+```bash
+scripts/install_desktop.sh          # usa target/release, después target/debug
+scripts/install_desktop.sh /ruta/a/zx48-gui
+```
+
+Copia `assets/icon.png` a `~/.local/share/icons/hicolor/256x256/apps/zx48.png` y genera
+`~/.local/share/applications/zx48.desktop` (a partir de `packaging/zx48.desktop`) con la
+ruta absoluta al binario, refrescando además las cachés del escritorio. Para deshacer:
+
+```bash
+rm ~/.local/share/applications/zx48.desktop \
+   ~/.local/share/icons/hicolor/256x256/apps/zx48.png
+```

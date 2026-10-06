@@ -42,7 +42,8 @@ src/debug     breakpoints, watchpoints, perfil
 src/frontend  lógica pura del frontend (viewport, ajustes, atajos, teclado, audio, icono) [feature `gui`]
 src/bin/gui.rs  binario `zx48-gui` (eframe/egui + glutin + cpal + rfd)             [feature `gui`]
 assets      icono 256×256 con esquinas transparentes (a partir de ico.jpeg)
-scripts     make_icon.py, que regenera `assets/icon.png`
+packaging   zx48.desktop (entrada de escritorio; la instala scripts/install_desktop.sh)
+scripts     make_icon.py (regenera el icono) e install_desktop.sh (icono en Wayland)
 ```
 
 Features: `cli` (tracing para el binario `zx48`), `gui` (dependencias de la interfaz); ambas

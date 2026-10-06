@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ZX Spectrum 48K
+GenericName=Emulador
+Comment=Emulador fiel del ZX Spectrum 48K escrito en Rust
+Exec=zx48-gui %F
+TryExec=zx48-gui
+Icon=zx48
+Terminal=false
+Categories=Game;Emulator;
+Keywords=zx;spectrum;sinclair;z80;retro;
+StartupNotify=true
+StartupWMClass=zx48
