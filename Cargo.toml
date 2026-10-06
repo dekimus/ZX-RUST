@@ -1,0 +1,29 @@
+[package]
+name = "zx48"
+version = "0.1.0"
+edition = "2024"
+default-run = "zx48"
+
+[dependencies]
+cpal = { version = "0.18.2", optional = true }
+eframe = { version = "0.36.2", default-features = false, features = ["glow", "default_fonts", "x11", "wayland"], optional = true }
+rfd = { version = "0.17.2", optional = true }
+ringbuf = { version = "0.5.2", optional = true }
+sha1 = "0.11.0"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", default-features = false, features = ["fmt", "std", "ansi"], optional = true }
+
+[[bin]]
+name = "zx48"
+path = "src/main.rs"
+required-features = ["cli"]
+
+[features]
+cli = ["dep:tracing-subscriber"]
+gui = ["dep:eframe", "dep:rfd", "dep:cpal", "dep:ringbuf"]
+default = ["cli", "gui"]
+
+[[bin]]
+name = "zx48-gui"
+path = "src/bin/gui.rs"
+required-features = ["gui"]

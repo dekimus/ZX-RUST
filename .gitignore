@@ -1,0 +1,22 @@
+# Artefactos de compilación
+/target
+
+# ROM con copyright: cada quien debe aportar la suya (ver AGENTS.md §4)
+48.rom
+*.rom
+
+# Contenido de terceros en tests/data (juegos y cintas con copyright).
+# Se conservan demo.tap (generado por nuestros tests) y zexdoc/zexall (suite GPL).
+tests/data/*
+!tests/data/demo.tap
+!tests/data/zexdoc.com
+!tests/data/zexall.com
+
+# Salidas de depuración generadas en la raíz del proyecto
+/*.log
+/*.bmp
+/*.ppm
+/*.scr
+
+# Configuración local de la interfaz (la GUI escribe settings.conf)
+settings.conf
