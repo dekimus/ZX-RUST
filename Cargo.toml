@@ -2,6 +2,8 @@
 name = "zx48"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+repository = "https://github.com/dekimus/ZX-RUST"
 default-run = "zx48"
 
 [dependencies]

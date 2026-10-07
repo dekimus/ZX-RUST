@@ -7,7 +7,8 @@ incluye en el repositorio.
 
 ## Estado
 
-Fases 1–7 completadas según [`AGENTS.md`](AGENTS.md):
+Fases 1–7 completadas según la especificación del proyecto (fichero local `AGENTS.md`, no
+incluido en el repositorio):
 
 * **Z80** completo (CB, ED, DD, FD, DDCB/FDCB, EI/DI con retardo de un instruction, IM 0/1/2) con
   coste en T-states por ciclo de máquina.
@@ -88,9 +89,9 @@ Las que necesitan `48.rom` se saltan si el fichero no existe: un clone limpio co
   snapshots, configuración, problemas frecuentes e icono.
 * [`docs/FRONTEND.md`](docs/FRONTEND.md) — arquitectura del frontend (bucle, temporización,
   vídeo, entrada, audio y su separación del núcleo).
-* [`AGENTS.md`](AGENTS.md) — especificación del proyecto: hardware, temporización, fases y
-  criterios de aceptación.
-* [`MEMORY.md`](MEMORY.md) — contexto persistente: constantes, hechos del hardware y reglas.
+* `AGENTS.md` y `MEMORY.md` — **ficheros locales, no incluidos en el repositorio**: la
+  especificación del proyecto (hardware, temporización, fases y criterios de aceptación) y el
+  contexto de trabajo con las constantes del hardware.
 
 ## Estructura
 
@@ -118,3 +119,7 @@ por defecto. El núcleo no depende de egui, glutin ni cpal: `--headless` funcion
 El reloj de pared solo se usa en el frontend y en `--bench`; el hardware virtual avanza por
 T-states (69 888 por frame, ≈50.08 Hz). Dada la misma ROM, RAM y entrada, la ejecución produce
 siempre los mismos T-states, framebuffer y hashes.
+
+## Licencia
+
+MIT (ver [`LICENSE`](LICENSE)). La ROM de Sinclair **no** se distribuye: hay que aportarla.
